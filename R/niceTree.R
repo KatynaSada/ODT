@@ -17,8 +17,6 @@
 #'        niceTree
 #' }
 #'  
-#'  
-#'   
 #'
 #' @return (Invisibly) returns a list. The representation of the tree in the command window and the plot of the tree
 #'
@@ -54,12 +52,6 @@ niceTree <- function(tree, folder = NULL,
                                 "#8E4884", "#A83333"),
                      fontname = "Roboto", fontstyle = "plain",
                      shape = "diamond", output_format = "png") {
-  # library(DiagrammeR)
-  # library(DiagrammeRsvg)
-  # library(svglite)
-  # library(ggparty)
-  # library(data.tree)
-  
   
   treeNode <- as.Node(tree)
   

@@ -2,9 +2,9 @@ Package: ODT
 Type: Package
 Title: Assign Optimal Treatment To Each Pacient
 Version: 0.3.1
-Author: Maddi Eceiza, Lucia Ruiz, Angel Rubio
+Author: Maddi Eceiza, Lucia Ruiz, Angel Rubio, Katyna Sada Del Real
 Maintainer: Angel Rubio <arubio@unav.es>
-Description: An optimized model for assigning optimal treatment to each patient.  
+Description: A model for assigning optimal treatment to each patient.  
 Depends: R (>= 4.0), matrixStats, partykit, data.tree, stats, DiagrammeR
 Imports: magick, DiagrammeRsvg, knitr
 Suggests:RUnit, Matrix, rmarkdown, robustbase 
