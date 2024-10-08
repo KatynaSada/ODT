@@ -46,23 +46,21 @@ A graphical display of the tree. It can also be saved as an image in the selecte
 \examples{
 
 \dontrun{
-  #This first example is a basic example of how to perform niceTree: 
-  
+  #This first example is a basic example of how to perform niceTree:
+
   data(DataODT.rda)
   ODTmut <- trainTree(PatientData = mutations_w12,
   PatientSensitivity=drug_response_w12, minbucket =10)
   niceTree(ODTMut,folder="")
 
-  
+
+
   #The next example, is the same as the first
-  # one but, plotting the tree trained for gene expressions. 
-  
-  data(DataODT.rda)
+  # one but, plotting the tree trained for gene expressions.
+
+  data("DATA_LOADED.RData")
   ODTExp <- trainTree(PatientData=expression_w34,
   PatientSensitivity=drug_response_w34, minbucket = 20)
   niceTree(ODTExp,folder="")
-  
-  
  }
- 
 }

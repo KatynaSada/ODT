@@ -2,47 +2,44 @@
 % Please edit documentation in R/trainTree.R
 \name{trainTree}
 \alias{trainTree}
-\title{trainTree function}
+\title{trainTree Function}
 \usage{
 trainTree(PatientData, PatientSensitivity, minbucket = 20)
 }
 \arguments{
-\item{PatientData}{A matrix indicating mutations or a gene expression. Depending on the data, this matrix will
-be binary(mutational data) or not (expression data).}
+\item{PatientData}{A matrix representing either gene expression data or mutation information.
+This matrix can be binary (for mutational data) or continuous (for expression data).}
 
-\item{PatientSensitivity}{Drug Response. Higher values of response are considered greater resistance and thus less sensitivity.
-(Depending on the interpretation of the response the user may have to change the sign of the data)}
+\item{PatientSensitivity}{A numeric vector indicating drug response values.
+Higher values suggest greater drug resistance and, consequently, less sensitivity.
+This vector can represent various measures of drug response, such as IC50,
+area under the drug response curve (AUC), or other relevant metrics.
+Depending on the interpretation of the sensitivity response, the user may need to adjust the sign of the data.}
 
-\item{minbucket}{The minimum number of patients on a node in order to split the patients}
+\item{minbucket}{An integer specifying the minimum number of patients required in a node to allow for a split.}
 }
 \value{
-A party of the trained tree with the treatments assigned to each node.
+An object of class 'party' representing the trained decision tree, with the assigned treatments for each node.
 }
 \description{
-Given a matrix containing gene PatientData levels or a binary matrix indicating mutations, it trains the model.
+This function trains a decision tree model based on patient data, which can either be gene expression levels or a binary matrix indicating mutations.
 }
-
-
 \examples{
 
 \dontrun{
-
-  #This first example is a basic example of how to perform trainTree: 
-  
+  # Basic example of using the trainTree function with mutational data
   data(DataODT.rda)
-  ODTmut <- trainTree(PatientData = mutations_w12,
-  PatientSensitivity=drug_response_w12, minbucket =10)
+  ODTmut <- trainTree(PatientData = mutations_w12, 
+                      PatientSensitivity = drug_response_w12,
+                      minbucket = 10)
   plot(ODTmut)
-  
-  #The next example, is the same as the first one but, 
-  #using a matrix with gen PatientData data: 
-  
-  data(DataODT.rda)
-  ODTExp <- trainTree(PatientData=expression_w34,
-  PatientSensitivity=drug_response_w34, minbucket = 20)
-  plot(ODTExp)
-  
-  }
 
+  # Example using gene expression data instead
+  data(DataODT.rda)
+  ODTExp <- trainTree(PatientData = expression_w34,
+                      PatientSensitivity = drug_response_w34,
+                      minbucket = 20)
+  plot(ODTExp)
+}
 
 }

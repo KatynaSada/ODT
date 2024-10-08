@@ -1,57 +1,55 @@
 #' predictTree function
-#' 
-#' Prediction of test data using ODT
-#' 
+#' Predict Treatment Outcomes with a Trained Decision Tree
 #'
-#' @param tree Trained tree
-#' @param PatientSensitivity Drug Response. Higher values of response are considered greater resistance and thus less sensitivity.
-#' (Depending on the interpretation of the response the user may have to change the sign of the data)
-#' @param PatientData A matrix indicating mutations or a gene expression. Depending on the data, this matrix will
-#' be binary(mutational data) or not (expression data).
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' 
-#' @return A party of the predicted tree with the treatments assigned to each node.
+#' This function predicts treatment outcomes for test data using a trained
+#' decision tree model (ODT). The predictions are based on the provided
+#' patient sensitivity data and patient features (mutations or gene expression).
 #'
-#' @examples 
-#' 
-#'    \dontrun{
-#'   #This first example is a basic 
-#'   #example of how to perform predictTree. 
-#'   
+#' @param tree A trained decision tree object.
+#' @param PatientSensitivity A numeric vector representing drug response values.
+#' Higher values indicate greater resistance and thus lower sensitivity to the treatment.
+#' Depending on the interpretation of these response values, users may need to 
+#' adjust the sign of the data accordingly.
+#' @param PatientData A matrix containing patient features. This can represent
+#' either binary mutation data (where 1 indicates the presence of a mutation) 
+#' or continuous data from gene expression profiles.
+#'
+#' @return A party object representing the predicted tree, with treatments assigned 
+#' to each node based on the provided patient data and sensitivity.
+#'
+#' @examples
+#' \dontrun{
+#'   # Example 1: Prediction using mutation data
 #'   data(DataODT.rda)
-#'   ODTmut <- trainTree(PatientData = mutations_w12,PatientSensitivity=drug_response_w12, minbucket =10)
-#'   
-#'   
-#'   ODT_mutpred<-predictTree(tree=ODTmut, PatientSensitivity=drug_response_w34, PatientData=mutations_w34)
-#'   
-#'   #The next example, is the same as the first one but,
-#'   # using a matrix with genomic expression data: 
-#'   
+#'   ODTmut <- trainTree(PatientData = mutations_w12, 
+#'                       PatientSensitivity = drug_response_w12, 
+#'                       minbucket = 10)
+#'   ODT_mutpred <- predictTree(tree = ODTmut, 
+#'                               PatientSensitivity = drug_response_w34, 
+#'                               PatientData = mutations_w34)
+#'
+#'   # Example 2: Prediction using gene expression data
 #'   data(DataODT.rda)
-#'   ODTExp <- trainTree(PatientData=expression_w34,PatientSensitivity=drug_response_w34, minbucket = 20)
-#'   
-#'   
-#'   ODT_EXPpred<-predictTree(tree=ODTExp, PatientSensitivity=drug_response_w12, PatientData=expression_w12)
-
-#'   }
+#'   ODTExp <- trainTree(PatientData = expression_w34, 
+#'                        PatientSensitivity = drug_response_w34, 
+#'                        minbucket = 20)
+#'   ODT_EXPpred <- predictTree(tree = ODTExp, 
+#'                               PatientSensitivity = drug_response_w12, 
+#'                               PatientData = expression_w12)
+#' }
 #'
 #' @export
-
-predictTree <- function(tree,PatientSensitivity, PatientData) {
-  
-  if (length(unique(c(unlist(PatientData)))) == 2){
+predictTree <- function(tree, PatientSensitivity, PatientData) {
+  if (length(unique(c(unlist(PatientData)))) == 2) {
     PatientData <- PatientData - min(PatientData) + 1L
-    mode(PatientData) <- "integer"
-    }else{
-    PatientData<-t(PatientData)
-    }
+    PatientData <- apply(PatientData, 2, as.integer)
+  } else{
+    PatientData <- t(PatientData)
+  }
   
-  treatments <- unlist(nodeapply(tree,  predict.party(tree, as.data.frame(PatientData)), info_node))
+  treatments <- unlist(nodeapply(tree,
+                                 predict.party(tree, as.data.frame(PatientData)), 
+                                 info_node))
   TratamientoTree <- match(treatments, colnames(PatientSensitivity))
   TratamientoTree <- factor(TratamientoTree, levels = 1:ncol(PatientSensitivity))
   return(TratamientoTree)

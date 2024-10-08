@@ -11,7 +11,7 @@ The *ODT* package can be easily installed from the Comprehensive R Archive Netwo
 
 `install.packages("ODT")`
 
-# Introduction
+# About
 
 Unlike other personalized medicine algorithms that use classification or regression trees, *ODT* works by solving optimization problems. It takes into account how each patient responds to different drugs (sensitivity data) and their genomic or mutational information.
 
@@ -32,6 +32,6 @@ The package consists of three main functions:
 As shown in Figure 1, the *ODT* model operates using two key inputs: the sensitivity matrix and the biomarker matrix. Initially, the model takes the biomarker data - which may consist of a binary matrix indicating the presence or absence of mutations, or a matrix reflecting gene expression levels - to train the decision tree.
 
 
-At each step, the trained tree splits patients into two groups based on the presence or absence of specific biomarkers. This split is optimized to ensure that the assigned treatment has the highest sensitivity for each group. The algorithm continues to recursively divide the branches until a predefined minimum group size is reached, at which point further splits are no longer possible.\
+At each step, the trained tree splits patients into two groups based on the presence or absence of specific biomarkers. This split is optimized to ensure that the assigned treatment has the highest sensitivity for each group. The algorithm continues to recursively divide the branches until a predefined minimum group size is reached, at which point further splits are no longer possible.
 
 

@@ -1,5 +1,5 @@
 ---
-title: "Introduction to ODT"
+title: "ODT"
 author: "Maddi Eceiza, Lucia Ruiz, Angel Rubio, Katyna Sada Del Real"
 date: "September 2024"
 vignette: >
@@ -15,11 +15,9 @@ email:
 
 ```{r LoadFunctions, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 library(knitr)
+library(rmarkdown)
 library(ODT)
 opts_chunk$set(error = FALSE)
-library(partykit)
-library(rmarkdown)
-library(DiagrammeR)
 ```
 
 ---
@@ -235,28 +233,25 @@ selected_treatments
 # Example: Assigning Optimal Treatment to New Patients (Mutational Data)
 
 In this example, we will use a binary matrix containing mutation information along with a drug response matrix from existing patients. We will train a model to later predict the best treatment for a new patient whose sensitivity response to different treatments is unknown.
-
-```{r, eval=TRUE}
+```{r, eval=FALSE}
 # Load the necessary library and datasets
 library(ODT)
-
-# Load mutation and drug response data
 data("mutations_w34")
 data("mutations_w12")
 data("drug_response_w12")
 data("drug_response_w34")
 
 # Define a binary matrix for new patients (using the first patient as an example)
-mut_newpatients <- mutations_w34[1, , drop = FALSE]
+mut_newpatients<-mutations_w34[1, ,drop=FALSE]
 
 # Train the decision tree model using known patient data
-ODT_MUT <- trainTree(PatientData = mutations_w12, PatientSensitivity = drug_response_w12, minbucket = 10)
+ODT_MUT<-trainTree(PatientData = mutations_w12, PatientSensitivity=drug_response_w12, minbucket =10)
 
 # Visualize the trained decision tree
-niceTree(ODT_MUT, folder = NULL)
+niceTree(ODT_MUT,folder=NULL)
 
 # Predict the optimal treatment for the new patient
-ODT_MUTpred <- predictTree(tree = ODT_MUT, PatientSensitivity = drug_response_w12, PatientData = mut_newpatients)
+ODT_MUTpred<-predictTree(tree=ODT_MUT, PatientSensitivity=drug_response_w12, PatientData=mut_newpatients)
 
 # Retrieve and display the name of the selected treatment
 selected_treatment <- colnames(drug_response_w12)[ODT_MUTpred]
