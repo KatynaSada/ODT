@@ -25,7 +25,7 @@ The package consists of three main functions:
 -   **Decision Tree Visualization** (**`niceTree`**): This function generates a graphical representation of the decision tree splits. Users can also download this plot in various formats to a specified directory.
 
 <div style="text-align: center;">
-  <img src="theprocess.png" alt="ODT Model Workflow" width="90%" />
+  <img src="vignettes/theprocess.png" alt="ODT Model Workflow" width="90%" />
   <p><strong>Figure 1. ODT Model Workflow.</strong></p>
 </div>
 
