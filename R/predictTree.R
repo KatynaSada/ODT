@@ -38,6 +38,7 @@
 #'                               PatientData = expression_w12)
 #' }
 #'
+#' @import partykit
 #' @export
 predictTree <- function(tree, PatientSensitivity, PatientData) {
   if (length(unique(c(unlist(PatientData)))) == 2) {

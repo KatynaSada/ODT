@@ -2,73 +2,67 @@
 #'
 #' A graphical display of the tree. It can also be saved as an image in the selected directory.
 #'
+#' @name niceTree  # Add this line
 #' @param tree A party of the trained tree with the treatments assigned to each node.
-#' @param folder Directory to save the image
-#' @param colors Selection of colors for the boxes
-#' @param fontname The font name
-#' @param fontstyle The font style
-#' @param shape format of the boxes of the different genes
-#' @param output_format image format
+#' @param folder Directory to save the image (default is the current working directory).
+#' @param colors A vector of colors for the boxes. Can include hex color codes (e.g., "#FFFFFF").
+#' @param fontname The name of the font to use for the text labels (default is "Roboto").
+#' @param fontstyle The style of the font (e.g., "plain", "italic", "bold").
+#' @param shape The format of the boxes for the different genes (e.g., "diamond", "box").
+#' @param output_format The image format for saving (e.g., "png", "jpg", "svg", "pdf").
 #'
 #' @details
 #' \itemize{
-#'  \item The user has already a defined style for the plot, the parameters
-#'        are previously set if the parameters are not modified when calling
-#'        niceTree
+#'  \item The user has already defined a style for the plot; the parameters
+#'        are set if not modified when calling niceTree.
 #' }
 #'
-#'
-#' @return (Invisibly) returns a list. The representation of the tree in the command window and the plot of the tree
+#' @return (Invisibly) returns a list. The representation of the tree in the command window and the plot of the tree.
 #'
 #' @examples
-#'
 #' \dontrun{
-#'   #This first example is a basic example of how to perform niceTree:
-#'
+#'   # Basic example of how to perform niceTree:
 #'   data(DataODT.rda)
 #'   ODTmut <- trainTree(PatientData = mutations_w12,
-#'   PatientSensitivity=drug_response_w12, minbucket =10)
-#'   niceTree(ODTMut,folder="")
+#'                        PatientSensitivity = drug_response_w12, minbucket = 10)
+#'   niceTree(ODTmut, folder = "")
 #'
-#'
-#'
-#'   #The next example, is the same as the first
-#'   # one but, plotting the tree trained for gene expressions.
-#'
+#'   # Example for plotting the tree trained for gene expressions:
 #'   data("DATA_LOADED.RData")
-#'   ODTExp <- trainTree(PatientData=expression_w34,
-#'   PatientSensitivity=drug_response_w34, minbucket = 20)
-#'   niceTree(ODTExp,folder="")
-
-#'  }
-#
+#'   ODTExp <- trainTree(PatientData = expression_w34,
+#'                        PatientSensitivity = drug_response_w34, minbucket = 20)
+#'   niceTree(ODTExp, folder = "")
+#' }
+#'
 #' @import magick
+#' @importFrom grDevices pdf dev.off
 #' @importFrom data.tree as.Node Do Traverse Get
-#' @import DiagrammeRsvg
+#' @importFrom data.tree SetEdgeStyle SetNodeStyle
 #' @export
 
-
-niceTree <- function(tree,
-                     folder = NULL,
+niceTree <- function(tree, folder = NULL,
                      colors = c(
-                       "",
-                       "#367592",
-                       "#39A7AE",
-                       "#96D6B6",
-                       "#FDE5B0",
-                       "#F3908B",
-                       "#E36192",
-                       "#8E4884",
+                       "",  # Placeholder for color, can be used for transparency
+                       "#367592", 
+                       "#39A7AE", 
+                       "#96D6B6", 
+                       "#FDE5B0", 
+                       "#F3908B", 
+                       "#E36192", 
+                       "#8E4884", 
                        "#A83333"
                      ),
-                     fontname = "Roboto",
-                     fontstyle = "plain",
-                     shape = "diamond",
-                     output_format = "png") {
+                     fontname = "Roboto",  # Font name for the text labels
+                     fontstyle = "plain",   # Font style for the text labels
+                     shape = "diamond",     # Shape of the nodes
+                     output_format = "png") {  # Default output format
+  
+  # Convert the input tree structure to a node object for DiagrammeR
   treeNode <- as.Node(tree)
   
-  levels <- max(treeNode$Get(function(x)
-    c(level = x$level)))
+  # Determine the maximum level of the tree for plotting
+  levels <- max(treeNode$Get(function(x) c(level = x$level)))
+  
   # bucle
   for (i in 1:levels) {
     color_node <- colors[(i %% length(colors)) + 1]
