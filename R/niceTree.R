@@ -43,8 +43,8 @@
 #'  }
 #
 #' @import magick
-#' @import DiagrammeR
-#' @importFrom data.tree as.Node
+#' @importFrom data.tree as.Node Do Traverse Get
+#' @import DiagrammeRsvg
 #' @export
 
 

@@ -5,7 +5,7 @@ Version: 0.3.1
 Author: Maddi Eceiza, Lucia Ruiz, Angel Rubio, Katyna Sada Del Real
 Maintainer: Angel Rubio <arubio@unav.es>
 Description: A model for assigning optimal treatment to each patient.  
-Depends: R (>= 4.0), matrixStats, partykit, data.tree, stats, DiagrammeR
+Depends: R (>= 4.0), matrixStats, partykit, data.tree, stats
 Imports: magick, DiagrammeRsvg
 Suggests:RUnit, Matrix, rmarkdown, robustbase, knitr 
 License: Artistic-2.0
