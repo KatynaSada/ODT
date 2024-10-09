@@ -35,6 +35,7 @@
 #' }
 #'
 #' @import magick
+#' @importFrom DiagrammeR DiagrammeR
 #' @importFrom grDevices pdf dev.off
 #' @importFrom data.tree as.Node Do Traverse Get
 #' @importFrom data.tree SetEdgeStyle SetNodeStyle
