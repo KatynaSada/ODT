@@ -6,7 +6,7 @@ Author: Maddi Eceiza, Lucia Ruiz, Angel Rubio, Katyna Sada Del Real
 Maintainer: Katyna Sada Del Real <ksada@unav.es>
 Description: A model for assigning optimal treatment to each patient.  
 Depends: R (>= 4.0), matrixStats, partykit, data.tree, stats
-Imports: magick, DiagrammeRsvg, grDevices, DiagrammeR
+Imports: magick, DiagrammeRsvg, grDevices, DiagrammeR, rsvg
 Suggests:RUnit, Matrix, rmarkdown, robustbase, knitr
 License: Artistic-2.0
 LazyData: true

@@ -4,21 +4,22 @@
 \alias{predictTree}
 \title{Predict Treatment Outcomes with a Trained Decision Tree}
 \usage{
-predictTree(tree, PatientSensitivity, PatientData)
+predictTree(tree, PatientData, PatientSensitivityTrain)
 }
 \arguments{
 \item{tree}{A trained decision tree object created by the `trainTree` function.}
 
-\item{PatientSensitivity}{A numeric vector representing drug response values.
-Higher values indicate greater resistance and, consequently, lower sensitivity
-to treatment. Depending on the interpretation of these values, users may need to
-adjust the sign of this data.}
-
-\item{PatientData}{A matrix of patient features. This may contain:
+\item{PatientData}{A matrix representing patient features, where rows correspond to patients/samples
+and columns correspond to genes/features. This matrix can contain:
 \itemize{
-  \item Binary mutation data.
-  \item Continuous data from gene expression profiles.
+  \item Binary mutation data (e.g., presence/absence of mutations).
+  \item Continuous data from gene expression profiles (e.g., expression levels).
 }}
+
+\item{PatientSensitivityTrain}{A matrix containing the drug response values of the **training dataset**. 
+In this matrix, rows correspond to patients, and columns correspond to drugs. 
+This matrix is used solely for extracting treatment names and is not 
+used in the prediction process itself.}
 }
 \value{
 A factor representing the assigned treatment for each node in the
@@ -34,19 +35,19 @@ mutations or gene expression profiles.
   # Example 1: Prediction using mutation data
   data(DataODT.rda)
   ODTmut <- trainTree(PatientData = mutations_w12, 
-                      PatientSensitivity = drug_response_w12, 
+                      PatientSensitivityTrain = drug_response_w12, 
                       minbucket = 10)
   ODT_mutpred <- predictTree(tree = ODTmut, 
-                              PatientSensitivity = drug_response_w34, 
+                              PatientSensitivityTrain = drug_response_w34, 
                               PatientData = mutations_w34)
 
   # Example 2: Prediction using gene expression data
   data(DataODT.rda)
   ODTExp <- trainTree(PatientData = expression_w34, 
-                       PatientSensitivity = drug_response_w34, 
+                       PatientSensitivityTrain = drug_response_w34, 
                        minbucket = 20)
   ODT_EXPpred <- predictTree(tree = ODTExp, 
-                              PatientSensitivity = drug_response_w12, 
+                              PatientSensitivityTrain = drug_response_w12, 
                               PatientData = expression_w12)
 }
 

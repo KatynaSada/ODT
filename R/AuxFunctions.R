@@ -16,8 +16,9 @@ NULL
 
 #' @rdname InternalFunctions
 #' @title Get Optimal Treatment
+#' @name getTreatment
 #' @description This internal function calculates the optimal treatment based on patient sensitivity data.
-#' @param PatientSensitivity A numeric matrix where rows represent samples and columns represent drug sensitivity values (e.g., IC50).
+#' @param PatientSensitivity A matrix representing drug response values (e.g., IC50), where rows correspond to patients/samples and columns correspond to drugs.
 #' @param weights A numeric vector indicating which samples are considered; only samples with weights equal to 1 are included in the analysis.
 #' @return An integer indicating the index of the optimal treatment based on the minimum sum of sensitivity values.
 #'
@@ -40,8 +41,8 @@ getTreatment <- function(PatientSensitivity, weights) {
 #' @title Get Split Information
 #' @description This internal function calculates the optimal split point based on a specified gene in the expression data.
 #' @param gene The index of the gene used for splitting the data.
-#' @param PatientData A matrix or data frame containing gene expression data or relevant features for splitting.
-#' @param PatientSensitivity A numeric matrix where rows represent samples and columns represent drug response values (e.g., IC50).
+#' @param PatientData A matrix representing patient features, where rows correspond to patients/samples and columns correspond to genes/features.
+#' @param PatientSensitivity A matrix representing drug response values (e.g., IC50), where rows correspond to patients/samples and columns correspond to drugs.
 #' @return A list containing:
 #'   - `sumic50`: The minimum summed IC50 values for the two groups.
 #'   - `T1`: The treatment associated with the first group.
@@ -84,7 +85,7 @@ getSplit <- function(gene, PatientData, PatientSensitivity) {
 #' @title Calculate Sum IC50 Value for Gene Patient Response
 #' @description This internal function calculates the summed IC50 value based on the response of patients to a specific gene.
 #' @param genePatientResponse A numeric vector representing the response of patients to a particular gene.
-#' @param PatientSensitivity A numeric matrix where rows represent samples and columns represent drug response values (e.g., IC50).
+#' @param PatientSensitivity A matrix representing drug response values (e.g., IC50), where rows correspond to patients/samples and columns correspond to drugs.
 #' @return A numeric value representing the minimum summed IC50 value derived from the patient responses.
 #'
 #' @keywords internal
@@ -107,8 +108,8 @@ getsumic50v3 <- function(genePatientResponse, PatientSensitivity) {
 #' @rdname InternalFunctions
 #' @title Find Optimal Split for Expression Data
 #' @description This internal function identifies the optimal split point in expression data based on patient sensitivity (IC50).
-#' @param PatientSensitivity A numeric matrix where rows represent samples and columns represent drug response values (e.g., IC50).
-#' @param PatientData A matrix or data frame containing gene expression data or relevant features for splitting.
+#' @param PatientSensitivity A matrix representing drug response values (e.g., IC50), where rows correspond to patients/samples and columns correspond to drugs.
+#' @param PatientData A matrix representing patient features, where rows correspond to patients/samples and columns correspond to genes/features.
 #' @param minimum An integer specifying the minimum number of samples required for a valid split (default is 1).
 #' @param weights A numeric vector indicating which samples are under study; defaults to NULL, meaning all samples are considered.
 #' @param verbose A logical value indicating whether to print additional information during execution (default is FALSE).
@@ -161,8 +162,8 @@ findsplitExp <- function(PatientSensitivity,
 #' @title Grow Decision Tree for Expression Data
 #' @description This internal function recursively builds a decision tree based on expression data and patient sensitivity (IC50).
 #' @param id A unique identifier for the node in the decision tree (default is 1L).
-#' @param PatientSensitivity A numeric matrix where rows represent samples and columns represent drug response values (e.g., IC50).
-#' @param PatientData A matrix or data frame containing gene expression data or relevant features for splitting.
+#' @param PatientSensitivity A matrix representing drug response values (e.g., IC50), where rows correspond to patients/samples and columns correspond to drugs.
+#' @param PatientData A matrix representing patient features, where rows correspond to patients/samples and columns correspond to genes/features.
 #' @param minbucket An integer specifying the minimum number of samples required in a child node for further splitting (default is 10).
 #' @param weights A numeric vector indicating which samples are under study; defaults to NULL, meaning all samples are considered.
 #' @return A `partynode` object representing the current node and its children in the decision tree.
@@ -251,8 +252,8 @@ growtreeExp <- function(id = 1L,
 #' @title Find Optimal Split in Mutation Data
 #' @description This internal function identifies the optimal split point in a mutation matrix based on
 #' patient sensitivity data (IC50) and the presence of specific mutations.
-#' @param PatientSensitivity A numeric vector of values representing drug sensitivity (IC50).
-#' @param X A matrix indicating the presence of mutations (PatientData) where rows represent samples and columns represent mutations.
+#' @param PatientSensitivity A matrix representing drug response values (e.g., IC50), where rows correspond to patients/samples and columns correspond to drugs.
+#' @param X (PatientData) A matrix representing patient features, where rows correspond to patients/samples and columns correspond to genes/features.
 #' @param minimum An integer specifying the minimum number of samples required for a valid split (default is 1).
 #' @param weights A numeric vector indicating which samples are included in the analysis; only samples with weights equal to 1 are considered.
 #' @return A `partysplit` object if a valid split is found, or `NULL` if no valid split can be determined.
@@ -318,8 +319,8 @@ findsplitMut <- function(PatientSensitivity, X, minimum = 1, weights) {
 #' @description This internal function recursively builds a decision tree based on patient data and
 #' drug sensitivity responses, specifically designed for mutation data.
 #' @param id A unique identifier for the node in the decision tree (default is 1L).
-#' @param PatientSensitivity A numeric vector indicating drug response values (e.g., IC50).
-#' @param PatientData A matrix or data frame containing mutation data or relevant features for splitting.
+#' @param PatientSensitivity A matrix representing drug response values (e.g., IC50), where rows correspond to patients/samples and columns correspond to drugs.
+#' @param PatientData A matrix representing patient features, where rows correspond to patients/samples and columns correspond to genes/features.
 #' @param minbucket An integer specifying the minimum number of samples required in a child node for further splitting (default is 10).
 #' @param weights A numeric vector indicating which samples are under study; defaults to NULL, meaning all samples are considered.
 #' @param findsplit A function used to find the best split; defaults to `findsplitMut`.

@@ -7,14 +7,18 @@
 trainTree(PatientData, PatientSensitivity, minbucket = 20)
 }
 \arguments{
-\item{PatientData}{A matrix representing either gene expression data or mutation information.
-This matrix can be binary (for mutational data) or continuous (for expression data).}
+\item{PatientData}{A matrix representing patient features, where rows correspond to patients/samples
+and columns correspond to genes/features. This matrix can contain:
+\itemize{
+  \item Binary mutation data (e.g., presence/absence of mutations).
+  \item Continuous data from gene expression profiles (e.g., expression levels).
+}}
 
-\item{PatientSensitivity}{A numeric vector indicating drug response values.
-Higher values suggest greater drug resistance and, consequently, less sensitivity.
-This vector can represent various measures of drug response, such as IC50,
-area under the drug response curve (AUC), or other relevant metrics.
-Depending on the interpretation of the sensitivity response, the user may need to adjust the sign of the data.}
+\item{PatientSensitivity}{A matrix representing drug response values, where rows correspond to patients
+in the same order as in `PatientData`, and columns correspond to drugs. Higher values indicate greater drug resistance and, consequently, 
+lower sensitivity to treatment. This matrix can represent various measures of drug 
+response, such as IC50 values or area under the drug response curve (AUC). Depending 
+on the interpretation of these values, users may need to adjust the sign of this data.}
 
 \item{minbucket}{An integer specifying the minimum number of patients required in a node to allow for a split.}
 }

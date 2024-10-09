@@ -45,13 +45,13 @@ growtreeMut(
 )
 }
 \arguments{
-\item{PatientSensitivity}{A numeric vector indicating drug response values (e.g., IC50).}
+\item{PatientSensitivity}{A matrix representing drug response values (e.g., IC50), where rows correspond to patients/samples and columns correspond to drugs.}
 
 \item{weights}{A numeric vector indicating which samples are under study; defaults to NULL, meaning all samples are considered.}
 
 \item{gene}{The index of the gene used for splitting the data.}
 
-\item{PatientData}{A matrix or data frame containing mutation data or relevant features for splitting.}
+\item{PatientData}{A matrix representing patient features, where rows correspond to patients/samples and columns correspond to genes/features.}
 
 \item{genePatientResponse}{A numeric vector representing the response of patients to a particular gene.}
 
@@ -63,7 +63,7 @@ growtreeMut(
 
 \item{minbucket}{An integer specifying the minimum number of samples required in a child node for further splitting (default is 10).}
 
-\item{X}{A matrix indicating the presence of mutations (PatientData) where rows represent samples and columns represent mutations.}
+\item{X}{(PatientData) A matrix representing patient features, where rows correspond to patients/samples and columns correspond to genes/features.}
 
 \item{findsplit}{A function used to find the best split; defaults to `findsplitMut`.}
 }

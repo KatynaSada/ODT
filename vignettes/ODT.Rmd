@@ -68,8 +68,8 @@ In this example, we will use a binary matrix called `mut_small`, which contains 
 
 First, we need to train the decision tree using the selected data. We will use the `trainTree` function, which requires the following inputs:
 
-- **PatientData**: The binary matrix containing mutation information.
-- **PatientSensitivity**: The matrix that provides drug response information.
+- **PatientData**: The binary matrix containing mutation information, where rows correspond to patients/samples and columns correspond to genes/features.
+- **PatientSensitivity**: The matrix that provides drug response information, where rows correspond to patients/samples and columns correspond to drugs.
 - **minbucket**: A fixed parameter that specifies the minimum number of patients required in a branch of the tree to allow a split.
 
 ```{r, eval=FALSE}
@@ -108,12 +108,12 @@ niceTree(tree = ODT_MUT, folder = NULL)
 To determine the treatment selected for each specific patient, we will use the `predictTree` function. This function identifies the treatment assigned by the algorithm based on the trained decision tree and the provided patient data. The required inputs for this function are:
 
 - **tree**: The trained decision tree obtained from the `trainTree` function.
-- **PatientData**: The binary matrix containing mutation information.
-- **PatientSensitivity**: The matrix containing drug response information.
+- **PatientData**: The binary matrix containing mutation information, where rows correspond to patients/samples and columns correspond to genes/features.
+- **PatientSensitivityTrain**: A matrix containing the drug response values of the **training dataset**. In this matrix, rows correspond to patients, and columns correspond to drugs. It is only for extracting treatment names and is not used in the prediction process itself.
 
 The following code snippet demonstrates how to use the `predictTree` function:
 
-```{r, eval=FALSE}
+```{r eval=TRUE, message=FALSE}
 # Load the necessary library and datasets
 library(ODT)
 data("mutations_w34")
@@ -130,7 +130,7 @@ ODT_MUT <- trainTree(PatientData = mut_small, PatientSensitivity = drug_small, m
 niceTree(ODT_MUT)
 
 # Predict the optimal treatment for each patient
-ODT_MUTpred <- predictTree(tree = ODT_MUT, PatientSensitivity = drug_small, PatientData = mut_small)
+ODT_MUTpred <- predictTree(tree = ODT_MUT, PatientSensitivityTrain = drug_small, PatientData = mut_small)
 
 # Retrieve and display the names of the selected treatments
 names_drug <- colnames(drug_small)
@@ -151,8 +151,8 @@ In this example, we will use a matrix called `gene_small`, which contains gene e
 
 First, we will train the decision tree using the selected data with the `trainTree` function. The required inputs for this function are:
 
-- **PatientData**: The matrix containing gene expression information.
-- **PatientSensitivity**: The matrix providing drug response information.
+- **PatientData**: The numeric matrix containing gene expression information, where rows correspond to patients/samples and columns correspond to genes/features.
+- **PatientSensitivity**: The matrix that provides drug response information, where rows correspond to patients/samples and columns correspond to drugs.
 - **minbucket**: A fixed parameter that specifies the minimum number of patients required in a branch of the tree to allow a split.
 
 ```{r, eval=FALSE}
@@ -191,12 +191,12 @@ niceTree(tree = ODT_EXP, folder = NULL)
 To determine the treatment selected for each specific patient, we will use the `predictTree` function. This function identifies the treatment assigned by the algorithm based on the trained decision tree and the provided patient data. The required inputs for this function are:
 
 - **tree**: The trained decision tree obtained from the `trainTree` function.
-- **PatientData**: The binary matrix containing mutation information.
-- **PatientSensitivity**: The matrix containing drug response information.
+- **PatientData**: The numeric matrix containing gene expression information, where rows correspond to patients/samples and columns correspond to genes/features.
+- **PatientSensitivityTrain**: A matrix containing the drug response values of the **training dataset**. In this matrix, rows correspond to patients, and columns correspond to drugs. It is only for extracting treatment names and is not used in the prediction process itself.
 
 The following code snippet demonstrates how to use the `predictTree` function:
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 # Load the necessary library and datasets
 library(ODT)
 
@@ -215,7 +215,7 @@ ODT_EXP <- trainTree(PatientData = gene_small, PatientSensitivity = drug_small, 
 niceTree(ODT_EXP)
 
 # Predict the optimal treatment for each patient
-ODT_EXPpred <- predictTree(tree = ODT_EXP, PatientSensitivity = drug_small, PatientData = gene_small)
+ODT_EXPpred <- predictTree(tree = ODT_EXP, PatientSensitivityTrain = drug_small, PatientData = gene_small)
 
 # Retrieve and display the names of the selected treatments
 selected_treatments <- colnames(drug_small)[ODT_EXPpred]
@@ -250,7 +250,7 @@ ODT_MUT<-trainTree(PatientData = mutations_w12, PatientSensitivity=drug_response
 niceTree(ODT_MUT,folder=NULL)
 
 # Predict the optimal treatment for the new patient
-ODT_MUTpred<-predictTree(tree=ODT_MUT, PatientSensitivity=drug_response_w12, PatientData=mut_newpatients)
+ODT_MUTpred<-predictTree(tree=ODT_MUT, PatientSensitivityTrain=drug_response_w12, PatientData=mut_newpatients)
 
 # Retrieve and display the name of the selected treatment
 selected_treatment <- colnames(drug_response_w12)[ODT_MUTpred]
@@ -266,9 +266,9 @@ selected_treatment
 
 # Example: Assigning Optimal Treatment to New Patients (Genomic Data)
 
-In this example, we will use a matrix containing gene expression information along with a drug response matrix from existing patients. We will train a model using the *ODT* package to predict the best treatment for a new patient whose sensitivity response to different treatments is unknown.
+In this example, we will use a matrix containing gene expression information along with a drug response matrix from existing patients. We will train a model to predict the best treatment for a new patient whose sensitivity response to different treatments is unknown.
 
-```{r,  eval=FALSE}
+```{r,  eval=TRUE}
 # Load the necessary library and datasets
 library(ODT)
 
@@ -279,8 +279,7 @@ data("drug_response_w12")
 data("drug_response_w34")
 
 # Define a matrix for new patients (using the first patient as an example)
-exp_newpatients <- expression_w34[, 1, drop = FALSE]
-
+exp_newpatients <- expression_w34[1, , drop = FALSE]
 # Train the decision tree model using known patient data
 ODT_EXP <- trainTree(PatientData = expression_w12, PatientSensitivity = drug_response_w12, minbucket = 10)
 
