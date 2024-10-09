@@ -1,7 +1,7 @@
 Package: ODT
 Type: Package
-Title: Assign Optimal Treatment To Each Pacient
-Version: 0.3.1
+Title: Optimal Decision Trees algorithm
+Version: 1.0.0
 Author: Maddi Eceiza, Lucia Ruiz, Angel Rubio, Katyna Sada Del Real
 Maintainer: Katyna Sada Del Real <ksada@unav.es>
 Description: A model for assigning optimal treatment to each patient.  

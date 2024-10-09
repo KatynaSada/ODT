@@ -1,0 +1,53 @@
+* using log directory ‘/Users/katyna/Library/CloudStorage/OneDrive----/GithubProjects/ODT/..Rcheck’
+* using R version 4.4.1 Patched (2024-09-30 r87211)
+* using platform: aarch64-apple-darwin20
+* R was compiled by
+    Apple clang version 14.0.0 (clang-1400.0.29.202)
+    GNU Fortran (GCC) 12.2.0
+* running under: macOS Sequoia 15.0
+* using session charset: UTF-8
+* using option ‘--as-cran’
+* checking for file ‘./DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘ODT’ version ‘0.3.1’
+* package encoding: UTF-8
+* checking CRAN incoming feasibility ... [3s/14s] NOTE
+Maintainer: ‘Katyna Sada Del Real <ksada@unav.es>’
+
+New submission
+
+The Title field should be in title case. Current version is:
+‘Assign Optimal Treatment To Each Pacient’
+In title case that is:
+‘Assign Optimal Treatment to Each Pacient’
+
+The build time stamp has invalid/outdated format.
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... NOTE
+Found the following hidden files and directories:
+  .DS_Store
+  .Rhistory
+  .gitignore
+  vignettes/.DS_Store
+  ..Rcheck
+  .Rproj.user
+  .git
+These were most likely included in error. See section ‘Package
+structure’ in the ‘Writing R Extensions’ manual.
+
+CRAN-pack does not know about
+  .DS_Store
+  vignettes/.DS_Store
+  ..Rcheck
+  .git
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘ODT’ can be installed ... ERROR
+Installation failed.
+See ‘/Users/katyna/Library/CloudStorage/OneDrive----/GithubProjects/ODT/..Rcheck/00install.out’ for details.
+* DONE
+Status: 1 ERROR, 2 NOTEs

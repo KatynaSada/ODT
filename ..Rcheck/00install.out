@@ -1,0 +1,15 @@
+* installing *source* package ‘ODT’ ...
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+Aviso en file(con, "w") :
+  no fue posible abrir el archivo '/Users/katyna/Library/CloudStorage/OneDrive----/GithubProjects/ODT/..Rcheck/00LOCK-ODT/00new/ODT/doc/index.html': No such file or directory
+Error in file(con, "w") : no se puede abrir la conexión
+ERROR: installing vignettes failed
+* removing ‘/Users/katyna/Library/CloudStorage/OneDrive----/GithubProjects/ODT/..Rcheck/ODT’
