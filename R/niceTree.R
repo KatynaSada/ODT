@@ -39,7 +39,6 @@
 #' @importFrom data.tree as.Node Do Traverse Get
 #' @importFrom data.tree SetEdgeStyle SetNodeStyle
 #' @export
-
 niceTree <- function(tree, folder = NULL,
                      colors = c(
                        "",  # Placeholder for color, can be used for transparency

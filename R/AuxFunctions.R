@@ -247,21 +247,6 @@ growtreeExp <- function(id = 1L,
   ))
 }
 
-# trainTreeExp <- function(PatientData, PatientSensitivity, minbucket = 20) {
-#   nodes <- growtreeExp(id = 1L, PatientSensitivity, PatientData, minbucket = minbucket)
-#   tree <- party(nodes, data = as.data.frame(PatientData))
-#   tree$node$info <- NULL
-#   return(tree)
-# }
-#
-# predictTreeExp <- function(tree,PatientSensitivity, PatientData) {
-#   treatments <- unlist(nodeapply(tree,
-#                                  predict.party(tree, as.data.frame(PatientData))
-#                                  , info_node))
-#   TratamientoTree <- match(treatments, colnames(PatientSensitivity))
-#   TratamientoTree <- factor(TratamientoTree, levels = 1:ncol(PatientSensitivity))
-# }
-
 #' @rdname InternalFunctions
 #' @title Find Optimal Split in Mutation Data
 #' @description This internal function identifies the optimal split point in a mutation matrix based on
@@ -426,18 +411,3 @@ growtreeMut <- function(id = 1L,
     info = ""
   ))
 }
-
-# trainTreeMut <- function(PatientData, PatientSensitivity, minbucket = 20) {
-#   PatientData <- PatientData - min(PatientData) + 1L
-#   PatientData <- apply(PatientData, 2, as.integer)
-#   nodes <- growtreeMut(id = 1L, PatientSensitivity, PatientData, minbucket = minbucket)
-#   tree <- party(nodes, data = as.data.frame(PatientData))
-#   tree$node$info <- NULL
-#   return(tree)
-# }
-
-# predictTreeMut <- function(tree,PatientSensitivity, PatientData) {
-#   PatientData <- PatientData - min(PatientData) + 1L
-#   PatientData <- apply(PatientData, 2, as.integer)
-#   predictTree(tree,PatientSensitivity, PatientData)
-# }

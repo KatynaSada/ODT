@@ -1,21 +1,22 @@
-#' predictTree function
 #' Predict Treatment Outcomes with a Trained Decision Tree
 #'
-#' This function predicts treatment outcomes for test data using a trained
-#' decision tree model (ODT). The predictions are based on the provided
-#' patient sensitivity data and patient features (mutations or gene expression).
+#' This function utilizes a trained decision tree model (ODT) to predict treatment
+#' outcomes for test data based on patient sensitivity data and features, such as
+#' mutations or gene expression profiles.
 #'
-#' @param tree A trained decision tree object.
+#' @param tree A trained decision tree object created by the `trainTree` function.
 #' @param PatientSensitivity A numeric vector representing drug response values.
-#' Higher values indicate greater resistance and thus lower sensitivity to the treatment.
-#' Depending on the interpretation of these response values, users may need to 
-#' adjust the sign of the data accordingly.
-#' @param PatientData A matrix containing patient features. This can represent
-#' either binary mutation data (where 1 indicates the presence of a mutation) 
-#' or continuous data from gene expression profiles.
+#' Higher values indicate greater resistance and, consequently, lower sensitivity
+#' to treatment. Depending on the interpretation of these values, users may need to
+#' adjust the sign of this data.
+#' @param PatientData A matrix of patient features. This may contain:
+#' \itemize{
+#'   \item Binary mutation data (1 indicates the presence of a mutation).
+#'   \item Continuous data from gene expression profiles.
+#' }
 #'
-#' @return A party object representing the predicted tree, with treatments assigned 
-#' to each node based on the provided patient data and sensitivity.
+#' @return A factor representing the assigned treatment for each node in the
+#' decision tree based on the provided patient data and sensitivity.
 #'
 #' @examples
 #' \dontrun{
@@ -41,17 +42,27 @@
 #' @import partykit
 #' @export
 predictTree <- function(tree, PatientSensitivity, PatientData) {
+  # Check if tree is of the correct class
+  if (!inherits(tree, "party")) {
+    stop("The 'tree' parameter must be a trained decision tree object of class 'party'.")
+  }
+  
+  # Adjust PatientData based on its unique values
   if (length(unique(c(unlist(PatientData)))) == 2) {
     PatientData <- PatientData - min(PatientData) + 1L
-    PatientData <- apply(PatientData, 2, as.integer)
-  } else{
+    mode(PatientData) <- "integer"
+  } else {
     PatientData <- t(PatientData)
   }
   
+  # Predict treatments based on the decision tree
   treatments <- unlist(nodeapply(tree,
                                  predict.party(tree, as.data.frame(PatientData)), 
                                  info_node))
+  
+  # Match treatments with sensitivity data
   TratamientoTree <- match(treatments, colnames(PatientSensitivity))
   TratamientoTree <- factor(TratamientoTree, levels = 1:ncol(PatientSensitivity))
+  
   return(TratamientoTree)
 }

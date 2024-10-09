@@ -2,31 +2,32 @@
 % Please edit documentation in R/predictTree.R
 \name{predictTree}
 \alias{predictTree}
-\title{predictTree function
-Predict Treatment Outcomes with a Trained Decision Tree}
+\title{Predict Treatment Outcomes with a Trained Decision Tree}
 \usage{
 predictTree(tree, PatientSensitivity, PatientData)
 }
 \arguments{
-\item{tree}{A trained decision tree object.}
+\item{tree}{A trained decision tree object created by the `trainTree` function.}
 
 \item{PatientSensitivity}{A numeric vector representing drug response values.
-Higher values indicate greater resistance and thus lower sensitivity to the treatment.
-Depending on the interpretation of these response values, users may need to 
-adjust the sign of the data accordingly.}
+Higher values indicate greater resistance and, consequently, lower sensitivity
+to treatment. Depending on the interpretation of these values, users may need to
+adjust the sign of this data.}
 
-\item{PatientData}{A matrix containing patient features. This can represent
-either binary mutation data (where 1 indicates the presence of a mutation) 
-or continuous data from gene expression profiles.}
+\item{PatientData}{A matrix of patient features. This may contain:
+\itemize{
+  \item Binary mutation data (1 indicates the presence of a mutation).
+  \item Continuous data from gene expression profiles.
+}}
 }
 \value{
-A party object representing the predicted tree, with treatments assigned 
-to each node based on the provided patient data and sensitivity.
+A factor representing the assigned treatment for each node in the
+decision tree based on the provided patient data and sensitivity.
 }
 \description{
-This function predicts treatment outcomes for test data using a trained
-decision tree model (ODT). The predictions are based on the provided
-patient sensitivity data and patient features (mutations or gene expression).
+This function utilizes a trained decision tree model (ODT) to predict treatment
+outcomes for test data based on patient sensitivity data and features, such as
+mutations or gene expression profiles.
 }
 \examples{
 \dontrun{

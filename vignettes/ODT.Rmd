@@ -16,7 +16,6 @@ email:
 ```{r LoadFunctions, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 library(knitr)
 library(rmarkdown)
-library(ODT)
 opts_chunk$set(error = FALSE)
 ```
 
@@ -114,7 +113,7 @@ To determine the treatment selected for each specific patient, we will use the `
 
 The following code snippet demonstrates how to use the `predictTree` function:
 
-```{r, eval=TRUE}
+```{r, eval=FALSE}
 # Load the necessary library and datasets
 library(ODT)
 data("mutations_w34")
@@ -233,7 +232,7 @@ selected_treatments
 # Example: Assigning Optimal Treatment to New Patients (Mutational Data)
 
 In this example, we will use a binary matrix containing mutation information along with a drug response matrix from existing patients. We will train a model to later predict the best treatment for a new patient whose sensitivity response to different treatments is unknown.
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 # Load the necessary library and datasets
 library(ODT)
 data("mutations_w34")
@@ -269,7 +268,7 @@ selected_treatment
 
 In this example, we will use a matrix containing gene expression information along with a drug response matrix from existing patients. We will train a model using the *ODT* package to predict the best treatment for a new patient whose sensitivity response to different treatments is unknown.
 
-```{r, eval=TRUE}
+```{r,  eval=FALSE}
 # Load the necessary library and datasets
 library(ODT)
 

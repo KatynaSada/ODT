@@ -34,7 +34,6 @@
 #' @import matrixStats
 #' @import partykit
 #' @export
-
 trainTree <- function(PatientData,
                       PatientSensitivity,
                       minbucket = 20) {
@@ -45,7 +44,7 @@ trainTree <- function(PatientData,
     # Transform the PatientData to start from 1
     PatientData <- PatientData - min(PatientData) + 1L
     # Set the mode of PatientData to integer for compatibility with the tree-growing function
-    PatientData <- apply(PatientData, 2, as.integer)
+    mode(PatientData) <- "integer"
     
     # Grow the decision tree using the mutational data
     nodes <- growtreeMut(id = 1L,
