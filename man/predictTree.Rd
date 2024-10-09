@@ -16,7 +16,7 @@ adjust the sign of this data.}
 
 \item{PatientData}{A matrix of patient features. This may contain:
 \itemize{
-  \item Binary mutation data (1 indicates the presence of a mutation).
+  \item Binary mutation data.
   \item Continuous data from gene expression profiles.
 }}
 }

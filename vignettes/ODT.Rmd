@@ -10,7 +10,7 @@ vignette: >
 output: 
   rmarkdown: html_vignette
 email:
-  - arubio@unav.es
+  - ksada@unav.es
 ---
 
 ```{r LoadFunctions, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
@@ -288,7 +288,7 @@ ODT_EXP <- trainTree(PatientData = expression_w12, PatientSensitivity = drug_res
 niceTree(ODT_EXP, folder = NULL)
 
 # Predict the optimal treatment for the new patient
-ODT_EXPpred <- predictTree(tree = ODT_EXP, PatientSensitivity = drug_response_w12, PatientData = exp_newpatients)
+ODT_EXPpred <- predictTree(tree = ODT_EXP, PatientSensitivityTrain = drug_response_w12, PatientData = exp_newpatients)
 
 # Retrieve and display the name of the selected treatment
 selected_treatment <- colnames(drug_response_w12)[ODT_EXPpred]
