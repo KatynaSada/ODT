@@ -20,18 +20,20 @@
 #' @return (Invisibly) returns a list. The representation of the tree in the command window and the plot of the tree.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   # Basic example of how to perform niceTree:
-#'   data(DataODT.rda)
+#'   data("mutations_w12")
+#'   data("drug_response_w12")
 #'   ODTmut <- trainTree(PatientData = mutations_w12,
 #'                        PatientSensitivity = drug_response_w12, minbucket = 10)
-#'   niceTree(ODTmut, folder = "")
+#'   niceTree(ODTmut)
 #'
 #'   # Example for plotting the tree trained for gene expressions:
-#'   data("DATA_LOADED.RData")
+#'   data("expression_w34")
+#'   data("drug_response_w34")
 #'   ODTExp <- trainTree(PatientData = expression_w34,
 #'                        PatientSensitivity = drug_response_w34, minbucket = 20)
-#'   niceTree(ODTExp, folder = "")
+#'   niceTree(ODTExp)
 #' }
 #'
 #' @import magick

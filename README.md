@@ -1,7 +1,7 @@
 
 # Optimal Decision Tree (ODT) R package
 
-The *ODT* R package implements the [Optimal Decision Tree (ODT) algorithm](https://academic.oup.com/bib/article/24/4/bbad200/7186396), a novel approach designed for the field of personalized medicine. This algorithm employs tree-based methods to recommend the most suitable treatment for each patient by considering their unique genomic and mutational data. 
+The *ODT* R package implements the [Optimal Decision Tree (ODT) algorithm](https://doi.org/10.1093/bib/bbad200), a novel approach designed for the field of personalized medicine. This algorithm employs tree-based methods to recommend the most suitable treatment for each patient by considering their unique genomic and mutational data. 
 
 Optimal Decision Trees iteratively refine drug recommendations along each branch until a predefined group size is achieved, ensuring that treatment suggestions are both personalized and statistically robust. This approach enhances decision-making in therapeutic contexts, allowing healthcare professionals to tailor interventions based on individual patient profiles.
 

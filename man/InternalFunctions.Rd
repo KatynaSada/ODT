@@ -22,7 +22,7 @@ findsplitExp(
   PatientData,
   minimum = 1,
   weights = NULL,
-  verbose = F
+  verbose = FALSE
 )
 
 growtreeExp(
@@ -74,8 +74,8 @@ An integer indicating the index of the optimal treatment based on the minimum su
 
 A list containing:
   - `sumic50`: The minimum summed IC50 values for the two groups.
-  - `T1`: The treatment associated with the first group.
-  - `T2`: The treatment associated with the second group.
+  - `Treatment1`: The treatment associated with the first group.
+  - `Treatment2`: The treatment associated with the second group.
   - `split`: The index of the optimal split point.
   - `expressionSplit`: The expression value at the split point adjusted by a small epsilon.
 

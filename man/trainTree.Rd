@@ -30,16 +30,18 @@ This function trains a decision tree model based on patient data, which can eith
 }
 \examples{
 
-\dontrun{
+\donttest{
   # Basic example of using the trainTree function with mutational data
-  data(DataODT.rda)
+  data("drug_response_w12")
+  data("mutations_w12")
   ODTmut <- trainTree(PatientData = mutations_w12, 
                       PatientSensitivity = drug_response_w12,
                       minbucket = 10)
   plot(ODTmut)
 
   # Example using gene expression data instead
-  data(DataODT.rda)
+  data("drug_response_w34")
+  data("expression_w34")
   ODTExp <- trainTree(PatientData = expression_w34,
                       PatientSensitivity = drug_response_w34,
                       minbucket = 20)

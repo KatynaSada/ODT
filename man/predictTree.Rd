@@ -31,23 +31,29 @@ outcomes for test data based on patient sensitivity data and features, such as
 mutations or gene expression profiles.
 }
 \examples{
-\dontrun{
+\donttest{
   # Example 1: Prediction using mutation data
-  data(DataODT.rda)
+  data("mutations_w12")
+  data("mutations_w34")
+  data("drug_response_w12")
   ODTmut <- trainTree(PatientData = mutations_w12, 
-                      PatientSensitivityTrain = drug_response_w12, 
+                      PatientSensitivity = drug_response_w12, 
                       minbucket = 10)
+  ODTmut
   ODT_mutpred <- predictTree(tree = ODTmut, 
-                              PatientSensitivityTrain = drug_response_w34, 
+                              PatientSensitivityTrain = drug_response_w12, 
                               PatientData = mutations_w34)
 
   # Example 2: Prediction using gene expression data
-  data(DataODT.rda)
+  data("expression_w34")
+  data("expression_w12")
+  data("drug_response_w34")
   ODTExp <- trainTree(PatientData = expression_w34, 
-                       PatientSensitivityTrain = drug_response_w34, 
+                       PatientSensitivity = drug_response_w34, 
                        minbucket = 20)
+  ODTExp
   ODT_EXPpred <- predictTree(tree = ODTExp, 
-                              PatientSensitivityTrain = drug_response_w12, 
+                              PatientSensitivityTrain = drug_response_w34, 
                               PatientData = expression_w12)
 }
 

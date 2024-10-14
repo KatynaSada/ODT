@@ -25,7 +25,7 @@ NULL
 #' @keywords internal
 getTreatment <- function(PatientSensitivity, weights) {
   # Filter PatientSensitivity based on weights, retaining only samples marked with weight 1
-  PatientSensitivity <- PatientSensitivity[weights == 1, , drop = F]
+  PatientSensitivity <- PatientSensitivity[weights == 1, , drop = FALSE]
   
   # Calculate the sum of treatment responses across samples
   sumtreat <- colSums2(PatientSensitivity)
@@ -45,8 +45,8 @@ getTreatment <- function(PatientSensitivity, weights) {
 #' @param PatientSensitivity A matrix representing drug response values (e.g., IC50), where rows correspond to patients/samples and columns correspond to drugs.
 #' @return A list containing:
 #'   - `sumic50`: The minimum summed IC50 values for the two groups.
-#'   - `T1`: The treatment associated with the first group.
-#'   - `T2`: The treatment associated with the second group.
+#'   - `Treatment1`: The treatment associated with the first group.
+#'   - `Treatment2`: The treatment associated with the second group.
 #'   - `split`: The index of the optimal split point.
 #'   - `expressionSplit`: The expression value at the split point adjusted by a small epsilon.
 #'
@@ -66,16 +66,16 @@ getSplit <- function(gene, PatientData, PatientSensitivity) {
   sumic50 <- min(rowMins(M1) + rowMins(M2))
   
   # Determine the treatments for the two groups based on the split point
-  T1 = max.col(-M1)[th]
-  names(T1) = colnames(PatientSensitivity)[T1]
-  T2 = max.col(-M2)[th]
-  names(T2) = colnames(PatientSensitivity)[T2]
+  Treatment1 = max.col(-M1)[th]
+  names(Treatment1) = colnames(PatientSensitivity)[Treatment1]
+  Treatment2 = max.col(-M2)[th]
+  names(Treatment2) = colnames(PatientSensitivity)[Treatment2]
   
   # Return a list with the relevant split information
   return(list(
     sumic50 = sumic50,
-    T1 = T1,
-    T2 = T2,
+    Treatment1 = Treatment1,
+    Treatment2 = Treatment2,
     split = th,
     expressionSplit = PatientData[I[th], gene] - 1e-6
   ))  # Adjust expression value slightly
@@ -116,11 +116,7 @@ getsumic50v3 <- function(genePatientResponse, PatientSensitivity) {
 #' @return A `partysplit` object representing the optimal split based on the specified patient sensitivity and expression data.
 #'
 #' @keywords internal
-findsplitExp <- function(PatientSensitivity,
-                         PatientData,
-                         minimum = 1,
-                         weights = NULL,
-                         verbose = F) {
+findsplitExp <- function(PatientSensitivity, PatientData, minimum = 1, weights = NULL, verbose = FALSE) {
   # PatientSensitivity: IC50
   # PatientData: gene expression data
   if (verbose)
@@ -153,7 +149,7 @@ findsplitExp <- function(PatientSensitivity,
       varid = as.integer(Gene),
       breaks = Output$expressionSplit,
       index = c(1L, 2L),
-      info = list(treatments = c(names(Output$T1), names(Output$T2)))
+      info = list(treatments = c(names(Output$Treatment1), names(Output$Treatment2)))
     )
   )
 }
@@ -295,11 +291,11 @@ findsplitMut <- function(PatientSensitivity, X, minimum = 1, weights) {
   # Ensure there are patients with and without the mutation to justify a split
   
   # Identify the treatments for the mutated and wildtype samples
-  T1Mut <- which.min(tA[, biomk]) # Treatment for mutated samples
-  T1WT <- which.min(tB[, biomk]) # Treatment for wildtype samples
+  Treatment1Mut <- which.min(tA[, biomk]) # Treatment for mutated samples
+  Treatment1WT <- which.min(tB[, biomk]) # Treatment for wildtype samples
   
   # Check if the same treatment is suggested for both groups; if so, don't split
-  if (T1Mut == T1WT)
+  if (Treatment1Mut == Treatment1WT)
     return(NULL) # Ensure that the treatments differ
   
   # Create an index for output with names indicating mutation and wildtype
@@ -310,7 +306,7 @@ findsplitMut <- function(PatientSensitivity, X, minimum = 1, weights) {
   return(partysplit(
     varid = as.integer(biomk),
     index = index,
-    info = list(treatments = c(names(T1Mut), names(T1WT)))
+    info = list(treatments = c(names(Treatment1Mut), names(Treatment1WT)))
   ))
 }
 
