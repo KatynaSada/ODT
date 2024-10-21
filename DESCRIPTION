@@ -1,7 +1,7 @@
 Package: ODT
 Type: Package
 Title: Optimal Decision Trees Algorithm
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: c(
   person(given = "Maddi", family = "Eceiza", role = "aut"),
   person(given = "Lucia", family = "Ruiz", role = "aut"),

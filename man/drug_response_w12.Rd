@@ -2,8 +2,10 @@
 \alias{drug_response_w12}
 \docType{data}
 \title{drug_response_w12 data}
-\description{A matrix containing drug response values (IC50 values) from patients retrieved from waves 1 and 2. Used as a toy example in \code{trainTree} and \code{predictTree} and \code{niceTree}
+\description{
+A matrix containing drug response values (IC50 values) obtained from patients in Waves 1 and 2 of the BeatAML2 cohort. This dataset serves as a toy example for demonstrating the functionality of the \code{trainTree}, \code{predictTree}, and \code{niceTree} functions.
 }
+
 \usage{data("drug_response_w12")}
 \format{
   The format is:

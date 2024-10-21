@@ -1,3 +1,3 @@
-# version 0.3.1:
+# version 1.0.1:
 
 starting version of the ODT package
