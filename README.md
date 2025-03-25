@@ -5,6 +5,10 @@ The *ODT* R package implements the [Optimal Decision Tree (ODT) algorithm](https
 
 Optimal Decision Trees iteratively refine drug recommendations along each branch until a predefined group size is achieved, ensuring that treatment suggestions are both personalized and statistically robust. This approach enhances decision-making in therapeutic contexts, allowing healthcare professionals to tailor interventions based on individual patient profiles.
 
+<div align="center">
+[![DOI](https://zenodo.org/badge/589525718.svg)](https://doi.org/10.5281/zenodo.8037212)
+</div>
+
 # Installation
 
 The *ODT* package can be easily installed from the Comprehensive R Archive Network (CRAN) repository. To install the package, you can use the following command in your R console:
