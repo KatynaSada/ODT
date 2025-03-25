@@ -7,7 +7,7 @@ Optimal Decision Trees iteratively refine drug recommendations along each branch
 
 <div align="center">
 
-[![DOI](https://zenodo.org/badge/589525718.svg)](https://doi.org/10.5281/zenodo.8037212)
+[![DOI](https://zenodo.org/badge/867665077.svg)](https://doi.org/10.5281/zenodo.15082102)
 
 </div>
 
